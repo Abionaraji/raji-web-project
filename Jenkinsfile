@@ -14,7 +14,7 @@ pipeline {
     NEXUS_CREDENTIAL_ID = 'nexus-jenkins'
     //NEXUS_USER = "$admin"
     //NEXUS_PASSWORD = "$admin"
-    //NEXUS_URL = "100.27.13.144:8081"
+    //NEXUS_URL = "54.82.207.139:8081"
     //NEXUS_REPOSITORY = "vpro-maven"
     //NEXUS_REPO_ID    = "maven_project"
     //ARTVERSION = "${env.BUILD_ID}"
@@ -22,7 +22,7 @@ pipeline {
   stages {
     stage('Git Checkout'){
             steps{
-                git branch: 'main', url: 'https://github.com/Abionaraji/forking-project.git'
+                git branch: 'main', url: 'https://github.com/Abionaraji/raji-web-project.git'
             }
         }
     stage('Build') {
@@ -53,7 +53,7 @@ pipeline {
     }
     stage('Sonar Scanner'){
             steps{
-                withSonarQubeEnv(credentialsId: 'personal-sonar', installationName: 'sonarqube') {
+                withSonarQubeEnv(credentialsId: 'sonar-jenkins', installationName: 'SonarQube') {
                     sh 'mvn sonar:sonar'
                 }
             }
@@ -70,13 +70,13 @@ pipeline {
            nexusArtifactUploader(
               nexusVersion: 'nexus3',
               protocol: 'http',
-              nexusUrl: '100.27.13.144:8081',
+              nexusUrl: '54.82.207.139:8081',
               groupId: 'webapp',
               version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
               repository: 'vpro-maven',  //"${NEXUS_REPOSITORY}",
               credentialsId: "${NEXUS_CREDENTIAL_ID}",
               artifacts: [
-                  [artifactId: 'webapp',
+                  [artifactId: 'web',
                   classifier: '',
                   file: "${WORKSPACE}/webapp/target/webapp.war",
                   type: 'war']
