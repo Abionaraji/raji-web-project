@@ -71,14 +71,14 @@ pipeline {
               nexusVersion: 'nexus3',
               protocol: 'http',
               nexusUrl: '54.82.207.139:8081',
-              groupId: 'webapp',
+              groupId: 'com.njonecompany.web',
               version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
               repository: 'vpro-maven',  //"${NEXUS_REPOSITORY}",
               credentialsId: "${NEXUS_CREDENTIAL_ID}",
               artifacts: [
                   [artifactId: 'web',
                   classifier: '',
-                  file: "${WORKSPACE}/webapp/target/webapp.war",
+                  file: "${WORKSPACE}/target/hello-world.war",
                   type: 'war']
               ]
            )
