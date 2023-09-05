@@ -67,13 +67,19 @@ pipeline {
     }
     stage("Nexus Artifact Uploader"){
         steps{
-           nexusArtifactUploader(
+           script{
+            
+            def readPonVersion = readMavenpom file: 'pom.xml'
+
+            def nexusRepo = readPomVersion.version.endsWith("SNAPSHOT") ? "vpro-snapshot" : "vpro-maven"
+
+            nexusArtifactUploader(
               nexusVersion: 'nexus3',
               protocol: 'http',
-              nexusUrl: '54.82.207.139:8081',
+              nexusUrl: '54.198.74.59:8081',
               groupId: 'com.njonecompany.web',
-              version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
-              repository: 'vpro-maven',  //"${NEXUS_REPOSITORY}",
+              version: "${readPomVersion.version}",
+              repository: nexusRepo,
               credentialsId: "${NEXUS_CREDENTIAL_ID}",
               artifacts: [
                   [artifactId: 'web',
@@ -81,7 +87,8 @@ pipeline {
                   file: "${WORKSPACE}/target/hello-world.war",
                   type: 'war']
               ]
-           )
+            )
+           }
         }
     }
  }
