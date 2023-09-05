@@ -69,7 +69,7 @@ pipeline {
         steps{
            script{
             
-            def readPonVersion = readMavenPom file: 'pom.xml'
+            def readPomVersion = readMavenPom file: 'pom.xml'
 
             def nexusRepo = readPomVersion.version.endsWith("SNAPSHOT") ? "vpro-snapshot" : "vpro-maven"
 
