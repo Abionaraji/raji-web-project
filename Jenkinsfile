@@ -80,11 +80,11 @@ pipeline {
               groupId: 'com.njonecompany.web',
               version: "${readPomVersion.version}",
               repository: nexusRepo,
-              credentialsId: "${NEXUS_CREDENTIAL_ID}",
+              credentialsId: 'nexus-jenkins',
               artifacts: [
                   [artifactId: 'web',
                   classifier: '',
-                  file: "${WORKSPACE}/target/hello-world.war",
+                  file: 'target/hello-world.war',
                   type: 'war']
               ]
             )
