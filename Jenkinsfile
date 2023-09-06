@@ -70,15 +70,6 @@ pipeline {
           nexusArtifactUploader artifacts: [[artifactId: 'web', classifier: '', file: 'target/hello-world.war', type: 'war']], credentialsId: 'nexus-jenkins', groupId: 'com.njonecompany.web', nexusUrl: '3.82.152.7:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'vpro-maven', version: '1.0'
         }
     }
-    stage('Docker Image Build'){
-      steps{
-        script{
-          sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
-          sh 'docker image tag $JOB_NAME:v1.$BUILD_ID abionaraji/$JOB_NAME:v1.$BUILD_ID'
-          sh 'docker image tag $JOB_NAME:v1.$BUILD_ID abionaraji/$JOB_NAME:latest'
-        }
-      }
-    }
  }
   post {
     always {
