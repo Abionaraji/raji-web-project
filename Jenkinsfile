@@ -73,21 +73,7 @@ pipeline {
 
             def nexusRepo = readPomVersion.version.endsWith("SNAPSHOT") ? "vpro-snapshot" : "vpro-maven"
 
-            nexusArtifactUploader(
-              nexusVersion: 'nexus3',
-              protocol: 'http',
-              nexusUrl: '100.25.30.222:8081',
-              groupId: 'com.njonecompany.web',
-              version: "${readPomVersion.version}",
-              repository: nexusRepo,
-              credentialsId: 'nexus-jenkins',
-              artifacts: [
-                  [artifactId: 'web',
-                  classifier: '',
-                  file: 'target/hello-world.war',
-                  type: 'war']
-              ]
-            )
+            nexusArtifactUploader artifacts: [[artifactId: 'web', classifier: '', file: 'target/hello-world.war', type: 'war']], credentialsId: 'nexus-jenkins', groupId: 'com.njonecompany.web', nexusUrl: '100.25.30.222:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'vpro-maven', version: '1.0'
            }
         }
     }
