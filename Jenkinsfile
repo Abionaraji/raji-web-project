@@ -14,7 +14,7 @@ pipeline {
     NEXUS_CREDENTIAL_ID = 'nexus-jenkins'
     //NEXUS_USER = "$admin"
     //NEXUS_PASSWORD = "$admin"
-    //NEXUS_URL = "54.82.207.139:8081"
+    //NEXUS_URL = "100.25.30.222:8081"
     //NEXUS_REPOSITORY = "vpro-maven"
     //NEXUS_REPO_ID    = "maven_project"
     //ARTVERSION = "${env.BUILD_ID}"
@@ -76,7 +76,7 @@ pipeline {
             nexusArtifactUploader(
               nexusVersion: 'nexus3',
               protocol: 'http',
-              nexusUrl: '54.198.74.59:8081',
+              nexusUrl: '100.25.30.222:8081',
               groupId: 'com.njonecompany.web',
               version: "${readPomVersion.version}",
               repository: nexusRepo,
