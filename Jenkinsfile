@@ -68,11 +68,6 @@ pipeline {
     stage("Nexus Artifact Uploader"){
         steps{
            script{
-            
-            def readPomVersion = readMavenPom file: 'pom.xml'
-
-            def nexusRepo = readPomVersion.version.endsWith("SNAPSHOT") ? "vpro-snapshot" : "vpro-maven"
-
             nexusArtifactUploader artifacts: [[artifactId: 'web', classifier: '', file: 'target/hello-world.war', type: 'war']], credentialsId: 'nexus-jenkins', groupId: 'com.njonecompany.web', nexusUrl: '3.82.152.7:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'vpro-maven', version: '1.0'
            }
         }
