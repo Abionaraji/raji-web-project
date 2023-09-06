@@ -14,7 +14,7 @@ pipeline {
     NEXUS_CREDENTIAL_ID = 'nexus-jenkins'
     //NEXUS_USER = "$admin"
     //NEXUS_PASSWORD = "$admin"
-    //NEXUS_URL = "100.25.30.222:8081"
+    //NEXUS_URL = "3.82.152.7:8081"
     //NEXUS_REPOSITORY = "vpro-maven"
     //NEXUS_REPO_ID    = "maven_project"
     //ARTVERSION = "${env.BUILD_ID}"
@@ -73,7 +73,7 @@ pipeline {
 
             def nexusRepo = readPomVersion.version.endsWith("SNAPSHOT") ? "vpro-snapshot" : "vpro-maven"
 
-            nexusArtifactUploader artifacts: [[artifactId: 'web', classifier: '', file: 'target/hello-world.war', type: 'war']], credentialsId: 'nexus-jenkins', groupId: 'com.njonecompany.web', nexusUrl: '100.25.30.222:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'vpro-maven', version: '1.0'
+            nexusArtifactUploader artifacts: [[artifactId: 'web', classifier: '', file: 'target/hello-world.war', type: 'war']], credentialsId: 'nexus-jenkins', groupId: 'com.njonecompany.web', nexusUrl: '3.82.152.7:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'vpro-maven', version: '1.0'
            }
         }
     }
