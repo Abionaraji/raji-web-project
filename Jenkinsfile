@@ -67,9 +67,7 @@ pipeline {
     }
     stage("Nexus Artifact Uploader"){
         steps{
-           script{
-            nexusArtifactUploader artifacts: [[artifactId: 'web', classifier: '', file: 'target/hello-world.war', type: 'war']], credentialsId: 'nexus-jenkins', groupId: 'com.njonecompany.web', nexusUrl: '3.82.152.7:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'vpro-maven', version: '1.0'
-           }
+          nexusArtifactUploader artifacts: [[artifactId: 'web', classifier: '', file: 'target/hello-world.war', type: 'war']], credentialsId: 'nexus-jenkins', groupId: 'com.njonecompany.web', nexusUrl: '3.82.152.7:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'vpro-maven', version: '1.0'
         }
     }
     stage('Docker Image Build'){
