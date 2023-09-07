@@ -6,7 +6,7 @@
     <groupId>com.njonecompany.web</groupId>
     <artifactId>web</artifactId>
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>2.0-SNAPSHOT</version>
     <name>cicd-web-project maven webapp</name>
     <url>http://maven.apache.org</url>
     <properties>
