@@ -67,7 +67,11 @@ pipeline {
     }
     stage("Nexus Artifact Uploader"){
         steps{
-          nexusArtifactUploader artifacts: 
+          script{
+
+            def readPomVersion = readMavenPom file: 'pom.xml'
+
+            nexusArtifactUploader artifacts: 
           [
             [
               artifactId: 'web', 
@@ -82,7 +86,8 @@ pipeline {
             nexusVersion: 'nexus3', 
             protocol: 'http', 
             repository: 'vpro-maven', 
-            version: '1.0'
+            version: 'readPomVersion'
+          }
         }
     }
  }
