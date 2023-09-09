@@ -55,26 +55,26 @@ pipeline {
           }
        }
     }
-    stage("Nexus Artifact Uploader"){
-        steps{
-            nexusArtifactUploader artifacts: 
-          [
-            [
-              artifactId: 'web', 
-              classifier: '', 
-              file: 'target/hello-world.war', 
-              type: 'war'
-              ]
-            ], 
-            credentialsId: 'nexus-jenkins', 
-            groupId: 'web', 
-            nexusUrl: '3.86.100.79:8081', 
-            nexusVersion: 'nexus3', 
-            protocol: 'http', 
-            repository: 'vpro-maven', 
-            version: 'v2'
+    stage('War Upload'){
+            steps{
+                nexusArtifactUploader artifacts: 
+                [
+                    [
+                        artifactId: 'vprofile', 
+                        classifier: '', 
+                        file: 'target/vprofile-v2.war', 
+                        type: 'war'
+                        ]
+                    ], 
+                    credentialsId: 'nexus-jenkins', 
+                    groupId: 'com.visualpathit',
+                    nexusUrl: '18.204.6.88:8081', 
+                    nexusVersion: 'nexus3', 
+                    protocol: 'http', 
+                    repository: 'vpro-maven', 
+                    version: 'v2'
+            }
         }
-    }
  }
   post {
     always {
