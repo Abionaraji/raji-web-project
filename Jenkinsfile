@@ -72,7 +72,7 @@ pipeline {
             nexusVersion: 'nexus3', 
             protocol: 'http', 
             repository: 'vpro-maven', 
-            version: 'v2',
+            version: 'v2'
         }
     }
  }
