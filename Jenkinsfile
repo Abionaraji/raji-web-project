@@ -57,8 +57,6 @@ pipeline {
     }
     stage("Nexus Artifact Uploader"){
         steps{
-          script{
-
             nexusArtifactUploader artifacts: 
           [
             [
@@ -75,7 +73,6 @@ pipeline {
             protocol: 'http', 
             repository: 'vpro-maven', 
             version: 'v2',
-          }
         }
     }
  }
