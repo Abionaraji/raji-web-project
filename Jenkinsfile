@@ -9,16 +9,6 @@ pipeline {
     maven 'Maven'
     jdk 'JDK'
   }
-   environment {
-    WORKSPACE = "${env.WORKSPACE}"
-    NEXUS_CREDENTIAL_ID = 'nexus-jenkins'
-    //NEXUS_USER = "$admin"
-    //NEXUS_PASSWORD = "$admin"
-    //NEXUS_URL = "3.82.152.7:8081"
-    //NEXUS_REPOSITORY = "vpro-maven"
-    //NEXUS_REPO_ID    = "maven_project"
-    //ARTVERSION = "${env.BUILD_ID}"
-  }
   stages {
     stage('Git Checkout'){
             steps{
@@ -84,33 +74,13 @@ pipeline {
             ], 
             credentialsId: 'nexus-jenkins', 
             groupId: 'web', 
-            nexusUrl: '100.25.37.16:8081', 
+            nexusUrl: '3.86.100.79:8081', 
             nexusVersion: 'nexus3', 
             protocol: 'http', 
             repository: nexusRepo, 
             version: "${readPomVersion.version}"
           }
         }
-    }
-    stage('Docker image Build'){
-      steps{
-        script{
-          sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
-          sh 'docker image tag $JOB_NAME:v1.$BUILD_ID abionaraji/$JOB_NAME:v1.BUILD_ID'
-          sh 'docker image tag $JOB_NAME:v1.$BUILD_ID abionaraji/$JOB_NAME:latest'
-        }
-      }
-    }
-    stage('Push Image To Docker'){
-      steps{
-        script{
-          withCredentials([string(credentialsId: 'docker-hub', variable: 'docker_hub_cred')]) {
-            sh 'docker login -u abionaraji -p ${docker-hub}'
-            sh 'docker image push abionaraji/$JOB_NAME:v1.BUILD_ID'
-            sh 'docker image push abionaraji/$JOB_NAME:latest'
-          }
-        }
-      }
     }
  }
   post {
