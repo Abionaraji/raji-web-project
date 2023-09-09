@@ -62,7 +62,7 @@ pipeline {
                     [
                         artifactId: 'vprofile', 
                         classifier: '', 
-                        file: 'target/vprofile-v2.war', 
+                        file: 'target/hello-world.war', 
                         type: 'war'
                         ]
                     ], 
