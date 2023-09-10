@@ -33,7 +33,7 @@ pipeline {
     }
     stage('Integration Test'){
         steps {
-          sh 'mvn verify -DskipUnitTests'
+          sh 'mvn test'
         }
     }
     stage ('Checkstyle Code Analysis'){
