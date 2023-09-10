@@ -61,6 +61,20 @@ pipeline {
                     version: 'v2'
             }
         }
+    stage('Sonar Scanner'){
+            steps{
+                withSonarQubeEnv(credentialsId: 'sonar-jenkins', installationName: 'SonarQube') {
+                    sh 'mvn sonar:sonar'
+                }
+            }
+        }
+    stage('SonarQube GateKeeper') {
+        steps {
+          timeout(time : 1, unit : 'HOURS'){
+          waitForQualityGate abortPipeline: false
+          }
+       }
+    }
  }
   post {
     always {
