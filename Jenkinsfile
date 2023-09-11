@@ -46,14 +46,14 @@ pipeline {
                 nexusArtifactUploader artifacts: 
                 [
                     [
-                        artifactId: 'vprofile', 
+                        artifactId: 'web', 
                         classifier: '', 
                         file: 'target/hello-world.war', 
                         type: 'war'
                         ]
                     ], 
                     credentialsId: 'nexus-jenkins', 
-                    groupId: 'web',
+                    groupId: 'com.njonecompany.web',
                     nexusUrl: '54.157.191.206:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
