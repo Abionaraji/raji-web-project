@@ -68,7 +68,7 @@ pipeline {
       steps{
         script{
          withCredentials([usernameColonPassword(credentialsId: 'docker-hub-pass', variable: 'docker-hub')]) {
-          sh 'docker login -u abionaraji -p ${docker-hub}'
+          sh 'docker login -u abionaraji -p ${docker-hub-pass}'
           sh 'docker image push abionaraji/$JOB_NAME:v1.$BUILD_ID'
           sh 'docker image push abionaraji/$JOB_NAME:latest'
          }
