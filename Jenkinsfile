@@ -54,7 +54,7 @@ pipeline {
                     ], 
                     credentialsId: 'nexus-jenkins', 
                     groupId: 'web',
-                    nexusUrl: '18.207.188.62:8081', 
+                    nexusUrl: '54.157.191.206:8081', 
                     nexusVersion: 'nexus3', 
                     protocol: 'http', 
                     repository: 'vpro-maven', 
