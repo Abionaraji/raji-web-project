@@ -68,8 +68,8 @@ pipeline {
       steps{
         script{
           withCredentials([string(credentialsId: 'docky', variable: 'docker-hub')]) {
-            sh 'docker login -u abionaraji -p ${docky}'
-            sh 'docker image push abionaraji/$JOB_NAME:v1.BUILD_ID'
+            sh 'docker login -u abionaraji -p ${docker-hub}'
+            sh 'docker image push abionaraji/$JOB_NAME:v1.$BUILD_ID'
             sh 'docker image push abionaraji/$JOB_NAME:latest'
           }
         }
