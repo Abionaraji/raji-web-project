@@ -67,8 +67,8 @@ pipeline {
     stage('Push Image To Docker'){
       steps{
         script{
-          withCredentials([string(credentialsId: 'docker-hub', variable: 'docker_hub_cred')]) {
-            sh 'docker login -u abionaraji -p ${docker-hub}'
+          withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerhub')]) {
+            sh 'docker login -u abionaraji -p ${dockerhub}'
             sh 'docker image push abionaraji/$JOB_NAME:v1.BUILD_ID'
             sh 'docker image push abionaraji/$JOB_NAME:latest'
           }
