@@ -31,10 +31,23 @@ pipeline {
             sh 'mvn test'
         }
     }
-    stage('Integration Test'){
+    stage('Integrated Test'){
         steps {
           sh 'mvn test'
         }
+        post {
+                success {
+                    slackSend channel: '#general',
+                    color: 'good',
+                    message: "INTEGRATED TESTING IS SUCCESS"
+                }
+                failure {
+                    slackSend channel: '#general',
+                    color: 'danger',
+                    message: "INTEGRATED TESTING IS FAILED"
+                }
+            }
+
     }
     stage ('Checkstyle Code Analysis'){
         steps {
