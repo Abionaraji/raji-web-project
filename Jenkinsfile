@@ -47,7 +47,6 @@ pipeline {
                     message: "INTEGRATED TESTING IS FAILED"
                 }
             }
-
     }
     stage ('Checkstyle Code Analysis'){
         steps {
