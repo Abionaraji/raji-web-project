@@ -57,14 +57,37 @@ pipeline {
             steps{
                 withSonarQubeEnv(credentialsId: 'sonar-jenkins', installationName: 'SonarQube') {
                     sh 'mvn sonar:sonar'
-                }
-            }
+                        -Dsonar.projectKey=mymy-new
+                        -Dsonar.host.url=http://52.91.118.237:9000
+                        -Dsonar.login=ok
+              }
         }
+    }
     stage('SonarQube GateKeeper') {
         steps {
           timeout(time : 1, unit : 'HOURS'){
           waitForQualityGate abortPipeline: true
           }
+       }
+    }
+    stage('War Upload'){
+            steps{
+                nexusArtifactUploader artifacts: 
+                [
+                    [
+                        artifactId: 'vprofile', 
+                        classifier: '', 
+                        file: 'target/hello-world2.war', 
+                        type: 'war'
+                        ]
+                    ], 
+                    credentialsId: 'nexus-jenkins', 
+                    groupId: 'com.visualpathit',
+                    nexusUrl: '35.175.243.141:8081', 
+                    nexusVersion: 'nexus3', 
+                    protocol: 'http', 
+                    repository: 'vpro-maven', 
+                    version: 'v2'
        }
     }
     stage('Docker image Build'){
