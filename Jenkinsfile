@@ -110,7 +110,7 @@ pipeline {
     stage('Deploy'){
       steps{
         sshagent(['ssh-user']) {
-          sh 'scp -o StrictHostKeyChecking=no target/hello-world.war root@172-31-85-56:/usr/local/tomcat8/webapps'
+          sh 'scp -o StrictHostKeyChecking=no target/hello-world.war root-user@172-31-85-56:/usr/local/tomcat8/webapps'
         }
       }
     }
