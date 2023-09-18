@@ -72,7 +72,7 @@ pipeline {
                 nexusArtifactUploader artifacts: 
                 [
                     [
-                        artifactId: 'web', 
+                        artifactId: 'web-app', 
                         classifier: '', 
                         file: 'target/hello-world.war', 
                         type: 'war'
