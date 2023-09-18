@@ -107,6 +107,13 @@ pipeline {
         }
       }
     }
+    stage('Deploy'){
+      steps{
+        sshagent(['ssh-user']) {
+   sh 'scp -o StrictHostKeyCheking=no target/hello-world.war  ubuntu@ec2-44.204.187.19:/usr/local/tomcat8/webapps'
+        }
+      }
+    }
  }
   post {
     always {
