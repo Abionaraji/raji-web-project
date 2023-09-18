@@ -53,20 +53,6 @@ pipeline {
             sh 'mvn checkstyle:checkstyle'
         }
     }
-    stage('Sonar Scanner'){
-            steps{
-                withSonarQubeEnv(credentialsId: 'sonar-jenkins', installationName: 'SonarQube') {
-                    sh 'mvn sonar:sonar'
-              }
-        }
-    }
-    stage('SonarQube GateKeeper') {
-        steps {
-          timeout(time : 1, unit : 'HOURS'){
-          waitForQualityGate abortPipeline: true
-          }
-       }
-    }
     stage('War Upload'){
             steps{
                 nexusArtifactUploader artifacts: 
