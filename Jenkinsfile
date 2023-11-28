@@ -60,7 +60,6 @@ pipeline {
                 }
             }
         }
-       }
     }
     stage('Docker image Build'){
       steps{
