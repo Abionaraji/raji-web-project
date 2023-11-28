@@ -61,40 +61,4 @@ pipeline {
             }
         }
     }
-    stage('Docker image Build'){
-      steps{
-        script{
-          sh 'docker image build -t $JOB_NAME:v1.$BUILD_ID .'
-          sh 'docker image tag $JOB_NAME:v1.$BUILD_ID abionaraji/$JOB_NAME:v1.$BUILD_ID'
-          sh 'docker image tag $JOB_NAME:v1.$BUILD_ID abionaraji/$JOB_NAME:latest'
-        }
-      }
-    }
-    stage('Push Image To Docker'){
-      steps{
-        script{
-          withCredentials([string(credentialsId: 'dockerhub', variable: 'docker')]) {
-            sh 'docker login -u abionaraji -p ${docker}'
-            sh 'docker image push abionaraji/$JOB_NAME:v1.$BUILD_ID'
-            sh 'docker image push abionaraji/$JOB_NAME:latest'
-          }
-        }
-      }
-    }
-    stage('Deploy'){
-      steps{
-        sshagent(['ssh-user']) {
-          sh 'scp -o StrictHostKeyChecking=no target/hello-world.war root-user@172-31-85-56:/usr/local/tomcat8/webapps'
-        }
-      }
-    }
-  post {
-    always {
-        echo 'Slack Notifications.'
-        slackSend channel: '#general', //update and provide your channel name
-        color: COLOR_MAP[currentBuild.currentResult],
-        message: "*${currentBuild.currentResult}:* Job Name '${env.JOB_NAME}' build ${env.BUILD_NUMBER} \n Build Timestamp: ${env.BUILD_TIMESTAMP} \n Project Workspace: ${env.WORKSPACE} \n More info at: ${env.BUILD_URL}"
-    }
-  }
 }
-
