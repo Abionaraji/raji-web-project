@@ -53,24 +53,13 @@ pipeline {
             sh 'mvn checkstyle:checkstyle'
         }
     }
-    stage('War Upload'){
+      stage('Sonar Scanner'){
             steps{
-                nexusArtifactUploader artifacts: 
-                [
-                    [
-                        artifactId: 'web-app', 
-                        classifier: '', 
-                        file: 'target/hello-world.war', 
-                        type: 'war'
-                        ]
-                    ], 
-                    credentialsId: 'nexus-jenkins', 
-                    groupId: 'com.visualpathit',
-                    nexusUrl: '3.82.223.14:8081', 
-                    nexusVersion: 'nexus3', 
-                    protocol: 'http', 
-                    repository: 'vpro-maven', 
-                    version: 'v2'
+                withSonarQubeEnv(credentialsId: 'sonar-jenkins', installationName: 'SonarQube') {
+                    sh "${scannerHome}/bin/sonar-scanner --version"
+                }
+            }
+        }
        }
     }
     stage('Docker image Build'){
